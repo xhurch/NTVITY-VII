@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network.CSharp.Plugins", "Network.CSharp.Plugins.csproj", "{005F9EF9-3D56-80EC-65BB-8197FF8D5E67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network.CSharp", "Network.CSharp.csproj", "{EF922020-19A4-A354-8AAA-23210A9FF157}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Network.CSharp.Editor", "Network.CSharp.Editor.csproj", "{8CE132CB-B384-FCE9-CF76-614FA001FB5B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{005F9EF9-3D56-80EC-65BB-8197FF8D5E67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{005F9EF9-3D56-80EC-65BB-8197FF8D5E67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{005F9EF9-3D56-80EC-65BB-8197FF8D5E67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{005F9EF9-3D56-80EC-65BB-8197FF8D5E67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF922020-19A4-A354-8AAA-23210A9FF157}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF922020-19A4-A354-8AAA-23210A9FF157}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF922020-19A4-A354-8AAA-23210A9FF157}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF922020-19A4-A354-8AAA-23210A9FF157}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CE132CB-B384-FCE9-CF76-614FA001FB5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CE132CB-B384-FCE9-CF76-614FA001FB5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CE132CB-B384-FCE9-CF76-614FA001FB5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CE132CB-B384-FCE9-CF76-614FA001FB5B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

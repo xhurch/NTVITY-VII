@@ -1,0 +1,270 @@
+Initialize engine version: 5.5.0b7 (bd91e53964bc)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 980 Ti (ID=0x17c8)
+    Vendor:   NVIDIA
+    VRAM:     6102 MB
+    Driver:   21.21.13.6909
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\Assembly-UnityScript.dll (this message is harmless)
+Loading C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
+Platform assembly: C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll (this message is harmless)
+Loading C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\UnityEngine.PlaymodeTestsRunner.dll into Unity Child Domain
+Platform assembly: C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\UnityEngine.VR.dll (this message is harmless)
+Loading C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\UnityEngine.VR.dll into Unity Child Domain
+Platform assembly: C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\Photon3Unity3D.dll (this message is harmless)
+Loading C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\Photon3Unity3D.dll into Unity Child Domain
+- Completed reload, in  0.024 seconds
+Platform assembly: C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\System.Core.dll (this message is harmless)
+Platform assembly: C:\Users\PIMG\Documents\Networked-VR-Networked-scene\Network\Networked Scene Test_Data\Managed\System.dll (this message is harmless)
+<RI> Initializing input.
+<RI> Input initialized.
+desktop: 1280x1024 60Hz; virtual: 1280x1024 at 0,0
+<RI> Initialized touch support.
+OpenVR initialized!
+ 
+(Filename:  Line: 350)
+
+UnloadTime: 0.446471 ms
+Connected to lighthouse:LHR-68F7804A
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+SwitchToProtocol: Udp PhotonNetwork.connected: False
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 1720 -> priority: 1 
+  Thread -> id: 1d38 -> priority: 1 
+Model override is really only meant to be used in the scene view for lining things up; using it at runtime is discouraged.  Use tracked device index instead to ensure the correct model is displayed for all users.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnConnectedToMaster() was called by PUN. Now this client is connected and could join a room. Calling: PhotonNetwork.JoinRandomRoom();
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+Operation failed: OperationResponse 225: ReturnCode: 32760 (No match found). Parameters: {}
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnPhotonRandomJoinFailed() was called by PUN. No random room available, so we create one. Calling: PhotonNetwork.CreateRoom(null, new RoomOptions() {maxPlayers = 4}, null);
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: connecting to region us
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OnJoinedRoom() called by PUN. Now this client is in a room. From here on, your game would be running. For reference, all callbacks are listed in enum: PhotonNetworkingMessage
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: Setting recorder's microphone device to 
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: MicWrapper does not support suggested frequency 24000 (min: 44100, max: 44100). Setting to 44100
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: [PV] Local voice #1 audio source frequency 44100 and encoder sampling rate 24000 do not match. Resampling will occur before encoding.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: Player 2 voice #1 speaker created.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player underrun: 0/12480(5274) = 12480
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 62496/62880(62880) = 384
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 267520/267840(267840) = 320
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 408480/408480(408480) = 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 423680/423840(423840) = 160
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 595200/595200(595200) = 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 727648/727680(727680) = 32
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 911328/911520(911520) = 192
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 935424/935520(935520) = 96
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1332160/1332480(1332480) = 320
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1345632/1345920(1345920) = 288
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1520864/1521120(1521120) = 256
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1550656/1550880(1550880) = 224
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1570688/1571040(1571040) = 352
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1585728/1585920(1585920) = 192
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1605216/1605600(1605600) = 384
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1622336/1622400(1622400) = 64
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1653472/1653600(1653600) = 128
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1679040/1679040(1679040) = 0
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1704992/1704960(1704960) = -32
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1750880/1751040(1751040) = 160
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1770848/1771200(1771200) = 352
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1799712/1800000(1800000) = 288
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1948832/1948800(1948800) = -32
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 1982432/1982880(1982880) = 448
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2100992/2101440(2101440) = 448
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2123808/2124000(2124000) = 192
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2134592/2135040(2135040) = 448
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2184032/2184480(2184480) = 448
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2241152/2241120(2241120) = -32
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2254784/2255040(2255040) = 256
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2285600/2285760(2285760) = 160
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2298912/2299200(2299200) = 288
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2315936/2316000(2316000) = 64
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2352704/2352960(2352960) = 256
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2364576/2364960(2364960) = 384
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2402688/2402880(2402880) = 192
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2443168/2443200(2443200) = 32
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2457888/2458080(2458080) = 192
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2469696/2470080(2470080) = 384
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2526752/2526720(2526720) = -32
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: PhotonVoiceSpeaker: player overrun: 2546016/2546400(2546400) = 384
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: Player 2 voice # 1 speaker unlinked.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+PUNVoice: Voice #1 of player 2 not found.
+ 
+(Filename: C:/buildslave/unity/build/artifacts/generated/common/runtime/DebugBindings.gen.cpp Line: 51)
+
+OpenVR Shutdown
+ 
+(Filename:  Line: 766)
+
