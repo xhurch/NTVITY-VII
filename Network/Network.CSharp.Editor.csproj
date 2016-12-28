@@ -152,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\MidiJack\Editor\MidiJackWindow.cs" />
-    <Compile Include="Assets\Neuron\Scripts\Editor\NeuronAnimatorEditor.cs" />
     <Compile Include="Assets\Neuron\Scripts\Editor\SkeletonTools.cs" />
     <Compile Include="Assets\PUNVoice\DemoVoice\Editor\CrossPlatformInput\CrossPlatformInputInitialize.cs" />
     <Compile Include="Assets\PUNVoice\Editor\ExitPlayModeOnScriptCompile.cs" />

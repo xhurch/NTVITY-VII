@@ -1,16 +1,3 @@
-//
-// Neuron data source handler class
-//
-// Refactored by Keijiro Takahashi
-// https://github.com/keijiro/NeuronRetargeting
-//
-// This is a derivative work of the Perception Neuron SDK. You can use this
-// freely as one of "Perception Neuron SDK Derivatives". See LICENSE.pdf and
-// their website for further details.
-//
-// The following description is from the original source code.
-//
-
 /************************************************************************************
  Copyright: Copyright 2014 Beijing Noitom Technology Ltd. All Rights reserved.
  Pending Patents: PCT/CN2014/085659 PCT/CN2014/071006
@@ -30,112 +17,277 @@
  limitations under the License.
 ************************************************************************************/
 
-using UnityEngine;
-using NeuronDataReaderWraper;
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using UnityEngine;
+using NeuronDataReaderWraper;
 
 namespace Neuron
 {
-    public class NeuronSource
-    {
-        #region Public properties;
-
-        public string Address { get; private set; }
-
-        public int Port { get; private set; }
-
-        public NeuronConnection.SocketType SocketType { get; private set; }
-
-        public IntPtr Socket { get; private set; }
-
-        public int ReferenceCounter { get; private set; }
-
-        #endregion
-
-        #region Public methods
-
-        public NeuronSource(
-            string address, int port,
-            NeuronConnection.SocketType socketType, IntPtr socket
-        )
-        {
-            Address = address;
-            Port = port;
-            SocketType = socketType;
-            Socket = socket;
-            ReferenceCounter = 0;
-        }
-
-        public int IncrementReferenceCount()
-        {
-            return ++ReferenceCounter;
-        }
-        
-        public int DecrementReferenceCount()
-        {
-            return --ReferenceCounter;
-        }
-
-        public NeuronActor AcquireActor(int actorID)
-        {
-            return FindOrCreateActor(actorID);
-        }
-
-        #endregion
-
-        #region Private variables
-
-        List<NeuronActor> _actors = new List<NeuronActor>();
-
-        // The main thread and the network thread will possibly access to the
-        // actor list and duplicatively make actor objects from a same actor.
-        // This lock object is used to avoid such a conflict.
-        System.Object _actorsLock = new System.Object();
-
-        #endregion
-
-        #region Callback function
-
-        public virtual void OnFrameDataReceived(IntPtr DataHeader, IntPtr data)
-        {
-            var header = new BvhDataHeader();
-
-            try
-            {
-                header = (BvhDataHeader)Marshal.PtrToStructure(
-                    DataHeader, typeof(BvhDataHeader)
-                );
-            }
-            catch(Exception e)
-            {
-                Debug.LogException(e);
-                return;
-            }
-
-            var actor = FindOrCreateActor((int)header.AvatarIndex);
-            actor.OnReceivedMotionData(header, data);
-        }
-
-        #endregion
-
-        #region Private functions
-
-        NeuronActor FindOrCreateActor(int actorID)
-        {
-            lock (_actorsLock)
-            {
-                foreach (var actor in _actors)
-                    if (actor.ActorID == actorID) return actor;
-
-                var newActor = new NeuronActor(actorID);
-                _actors.Add(newActor);
-
-                return newActor;
-            }
-        }
-
-        #endregion
-    }
+	public class NeuronSource
+	{
+		public static int									NoDataFrameTimeOut = 5000;
+		public delegate void ResumeActorDelegate( NeuronActor actor );
+		public delegate void SuspendActorDelegate( NeuronActor actor );
+		
+		List<ResumeActorDelegate>							resumeActorCallbacks = new List<ResumeActorDelegate>();
+		List<SuspendActorDelegate>							suspendActorCallbacks = new List<SuspendActorDelegate>();
+		Dictionary<int, NeuronActor>						activeActors = new Dictionary<int, NeuronActor>();
+		Dictionary<int, NeuronActor>						suspendedActors = new Dictionary<int, NeuronActor>();
+		
+		public Guid											guid = Guid.NewGuid();
+		public string										address { get; private set; }
+		public int											port { get; private set; }
+		public int											commandServerPort{ get; private set; }
+		public NeuronConnection.SocketType					socketType { get; private set; }
+		public IntPtr										socketReference { get; private set; }
+		public IntPtr										commandSocketReference { get; private set; }
+		public int											numOfActiveActors { get { return activeActors.Count; } }
+		public int											numOfSuspendedActors { get { return suspendedActors.Count; } }
+		public int											referenceCounter { get; private set; }
+		
+		public NeuronSource( string address, int port, int commandServerPort, NeuronConnection.SocketType socketType, IntPtr socketReference, IntPtr commandSocketReference )
+		{
+			this.address = address;
+			this.port = port;
+			this.socketType = socketType;
+			this.socketReference = socketReference;
+			this.commandSocketReference = commandSocketReference;
+			this.referenceCounter = 0;
+			
+			// QueryNumOfActors();
+		}
+		
+		public void RegisterResumeActorCallback( ResumeActorDelegate callback )
+		{
+			if( callback != null )
+			{
+				resumeActorCallbacks.Add( callback );
+			}
+		}
+		
+		public void UnregisterResumeActorCallback( ResumeActorDelegate callback )
+		{
+			if( callback != null )
+			{
+				resumeActorCallbacks.Remove( callback );
+			}
+		}
+		
+		public void RegisterSuspendActorCallback( SuspendActorDelegate callback )
+		{
+			if( callback != null )
+			{
+				suspendActorCallbacks.Add( callback );
+			}
+		}
+		
+		public void UnregisterSuspendActorCallback( SuspendActorDelegate callback )
+		{
+			if( callback != null )
+			{
+				suspendActorCallbacks.Remove( callback );
+			}
+		}
+		
+		public void Grab()
+		{
+			++referenceCounter;
+		}
+		
+		public void Release()
+		{
+			--referenceCounter;
+		}
+		
+		public void OnDestroy()
+		{
+			SuspendAllActors();
+		}
+		
+		public void OnUpdate()
+		{
+			int now = NeuronActor.GetTimeStamp();
+			List<NeuronActor> suspend_list = new List<NeuronActor>();
+			foreach( KeyValuePair<int, NeuronActor> iter in activeActors )
+			{
+				if( now - iter.Value.timeStamp > NoDataFrameTimeOut )
+				{
+					suspend_list.Add( iter.Value );
+				}
+			}
+			
+			List<NeuronActor> resume_list = new List<NeuronActor>();
+			foreach( KeyValuePair<int, NeuronActor> iter in suspendedActors )
+			{
+				if( now - iter.Value.timeStamp < NoDataFrameTimeOut )
+				{
+					resume_list.Add( iter.Value );
+				}
+			}
+			
+			for( int i = 0; i < suspend_list.Count; ++i )
+			{
+				suspend_list[i].OnNoFrameData( suspend_list[i] );
+				SuspendActor( suspend_list[i] );
+			}
+			
+			for( int i = 0; i < resume_list.Count; ++i )
+			{
+				resume_list[i].OnResumeFrameData( resume_list[i] );
+				ResumeActor( resume_list[i] );
+			}
+			
+			// if actor suspended or resumed, query for actors count
+			//if( suspend_list.Count > 0 || resume_list.Count > 0 )
+			//{
+			//	QueryNumOfActors();
+			//}
+		}
+		
+		public virtual void OnFrameDataReceived( IntPtr DataHeader, IntPtr data )
+		{
+			BvhDataHeader header = new BvhDataHeader();
+			try
+			{
+				header = (BvhDataHeader)Marshal.PtrToStructure( DataHeader, typeof( BvhDataHeader ) );
+			}
+			catch( Exception e )
+			{
+				Debug.LogException( e );
+			}
+			
+			int actorID = (int)header.AvatarIndex;			
+			NeuronActor actor = null;
+			// find active actor
+			actor = FindActiveActor( actorID );
+			if( actor != null )
+			{
+				// if actor is active
+				actor.OnReceivedMotionData( header, data );
+			}
+			else
+			{
+				// find suspended actor
+				actor = FindSuspendedActor( actorID );
+				if( actor == null )
+				{
+					// if no such actor, create one
+					actor = CreateActor( actorID );
+				}
+				
+				actor.OnReceivedMotionData( header, data );
+			}
+		}
+		
+		public virtual void OnSocketStatusChanged( SocketStatus status, string msg )
+		{
+		}
+		
+		public NeuronActor AcquireActor( int actorID )
+		{
+			NeuronActor actor = FindActiveActor( actorID );
+			if( actor != null )
+			{
+				return actor;
+			}
+			
+			actor = FindSuspendedActor( actorID );
+			if( actor != null )
+			{
+				return actor;
+			}
+			
+			actor = CreateActor( actorID );
+			return actor;
+		}
+		
+		public NeuronActor[] GetActiveActors()
+		{
+			NeuronActor[] actors = new NeuronActor[activeActors.Count];
+			activeActors.Values.CopyTo( actors, 0 );
+			return actors;
+		}
+		
+		public NeuronActor[] GetActors()
+		{
+			NeuronActor[] actors = new NeuronActor[activeActors.Count + suspendedActors.Count];
+			activeActors.Values.CopyTo( actors, 0 );
+			activeActors.Values.CopyTo( actors, activeActors.Count );
+			return actors;
+		}
+		
+		NeuronActor CreateActor( int actorID )
+		{
+			NeuronActor find = FindSuspendedActor( actorID );
+			if( find == null )
+			{
+				NeuronActor actor = new NeuronActor( this, actorID );
+				suspendedActors.Add( actorID, actor );
+				return actor;
+			}
+			return find;
+		}
+		
+		void DestroyActor( int actorID )
+		{
+			activeActors.Remove( actorID );
+			suspendedActors.Remove( actorID );
+		}
+		
+		void SuspendActor( NeuronActor actor )
+		{
+			activeActors.Remove( actor.actorID );
+			suspendedActors.Add( actor.actorID, actor );
+			
+			Debug.Log( string.Format( "[NeuronSource] Suspend actor {0}", actor.guid.ToString( "N" ) ) );
+			for( int i = 0; i < suspendActorCallbacks.Count; ++i )
+			{
+				suspendActorCallbacks[i]( actor );
+			}
+		}
+		
+		void ResumeActor( NeuronActor actor )
+		{
+			suspendedActors.Remove( actor.actorID );
+			activeActors.Add( actor.actorID, actor );
+			
+			Debug.Log( string.Format( "[NeuronSource] Resume actor {0}", actor.guid.ToString( "N" ) ) );
+			
+			for( int i = 0; i < resumeActorCallbacks.Count; ++i )
+			{
+				resumeActorCallbacks[i]( actor );
+			}
+		}
+		
+		void SuspendAllActors()
+		{
+			List<NeuronActor> suspend_list = new List<NeuronActor>();
+			foreach( KeyValuePair<int, NeuronActor> iter in activeActors )
+			{
+				suspend_list.Add( iter.Value );
+			}
+			
+			for( int i = 0; i < suspend_list.Count; ++i )
+			{
+				suspend_list[i].OnNoFrameData( suspend_list[i] );
+				SuspendActor( suspend_list[i] );
+			}
+		}
+		
+		NeuronActor FindSuspendedActor( int actorID )
+		{
+			NeuronActor actor = null;
+			suspendedActors.TryGetValue( actorID, out actor );
+			return actor;
+		}
+		
+		NeuronActor FindActiveActor( int actorID )
+		{
+			NeuronActor actor = null;
+			activeActors.TryGetValue( actorID, out actor  );
+			return actor;
+		}
+	}
 }
