@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/NTVTY VII.unity
+- path: Assets/Scenes/NTVTY VII (Steph).unity
   isLoaded: 1
   isActive: 1
